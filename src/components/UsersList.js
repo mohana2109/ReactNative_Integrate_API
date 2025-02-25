@@ -1,8 +1,8 @@
-// src/components/UsersList.js
 import React, { useEffect } from 'react';
-import { View, Text, FlatList, Image, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../actions/userActions';
+import { List, Avatar, Text } from 'react-native-paper';
 
 const UsersList = () => {
   const dispatch = useDispatch();
@@ -25,17 +25,14 @@ const UsersList = () => {
       <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginVertical: 10 }}>
         Users List
       </Text>
-      <FlatList
-        data={users}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={{ padding: 10, alignItems: 'center' }}>
-            <Image source={{ uri: item.avatar }} style={{ width: 50, height: 50, borderRadius: 25 }} />
-            <Text>{item.first_name} {item.last_name}</Text>
-            <Text>{item.email}</Text>
-          </View>
-        )}
-      />
+      {users.map((user) => (
+        <List.Item
+          key={user.id}
+          title={`${user.first_name} ${user.last_name}`}
+          description={user.email}
+          left={(props) => <Avatar.Image {...props} source={{ uri: user.avatar }} size={50} />}
+        />
+      ))}
     </View>
   );
 };

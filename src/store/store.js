@@ -1,6 +1,4 @@
-// src/store/store.js
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import {thunk} from 'redux-thunk';
 import rootReducer from '../reducers/rootReducer';
 
